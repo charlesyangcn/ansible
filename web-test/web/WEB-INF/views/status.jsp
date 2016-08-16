@@ -6,6 +6,7 @@
 	<title>Health</title>		
 </head>
 <body>
-	DB <b>${ping}</b>
+	datacenterId: <b>${datacenterId}</b><br/>
+	workerId: <b>${workerId}</b>
 </body>
 </html>

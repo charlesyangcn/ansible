@@ -15,15 +15,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class StatusController {
 
 	private final String datacenterId;
+	private final String workerId;
 
 	@Autowired
 	public StatusController(Environment environment) {
 		datacenterId = environment.getProperty("data.generator.datacenterId");
+		workerId = environment.getProperty("data.generator.workerId");
 	}
 	
 	@RequestMapping(value = "/status")
 	public void status(Model model) {
-			model.addAttribute("ping", datacenterId);
+			model.addAttribute("datacenterId", datacenterId);
+			model.addAttribute("workerId", workerId);
 	}
 
 	
