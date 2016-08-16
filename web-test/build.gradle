@@ -49,8 +49,8 @@ dependencies {
 	
 }
 
-// target Java 7 class files
-targetCompatibility = 1.7
+// target Java 8 class files
+targetCompatibility = 1.8
 
 
 // remap source directories
