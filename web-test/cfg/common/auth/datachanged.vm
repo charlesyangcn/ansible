@@ -1,0 +1,13 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></head>
+<body style="font-family:arial,sans-serif; font-size:0.8em">
+	#set( $fmt = $DateTimeFormat.forPattern('dd MMM yyyy HH:mm ZZ') )
+	
+	<h3>Profile Changed</h3>
+	<p>This email was sent automatically in response to your profile information change. Your profile was changed at $fmt.print($timestamp).</p>
+	<p>If you did not change your profile, please let us know. Notifying us is important as it helps us ensure no one is accessing your account without your knowledge.</p>
+	<p>Thanks,<br/>${appTitle} Support</p>
+
+</body>
+</html>

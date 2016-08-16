@@ -1,0 +1,86 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'maven'
+apply plugin: 'eclipse-wtp'
+
+group = 'com.charlesyang.app'
+archivesBaseName = 'charlesyang-base'
+version = '1.0.0.RELEASE'
+
+//Allow the version to be determined by the svn tag via the jenkins parameterized build
+if (project.hasProperty("svntag")) {
+    version = svntag
+}
+
+// use Mnet and Maven central repositories
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	//core
+	compile 'joda-time:joda-time:2.3'
+	compile 'org.apache.poi:poi:3.10-FINAL'
+ 	compile 'org.apache.poi:poi-ooxml:3.10-FINAL'
+    compile 'org.apache.poi:poi-ooxml-schemas:3.10-FINAL'
+	
+	compile 'org.apache.httpcomponents:httpclient:4.3.4'
+	compile 'org.apache.httpcomponents:httpmime:4.3.4'
+
+	compile 'com.fasterxml.jackson.core:jackson-databind:2.4.1.3'
+	compile 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.4.1'
+
+	compile 'org.springframework:spring-beans:4.1.7.RELEASE'
+	compile 'org.springframework:spring-context:4.1.7.RELEASE'
+	
+	compile 'commons-fileupload:commons-fileupload:1.3.1'
+	compile 'com.fasterxml.jackson.core:jackson-databind:2.4.1.3'
+	compile 'org.springframework.mobile:spring-mobile-device:1.1.5.RELEASE'
+	compile 'org.springframework.security:spring-security-config:4.0.1.RELEASE'
+	compile 'org.springframework:spring-webmvc:4.1.7.RELEASE'
+	
+	//servlet
+	compile 'javax.servlet.jsp:jsp-api:2.2'
+	compile 'javax.servlet:javax.servlet-api:3.1.0'
+	
+	compile 'log4j:log4j:1.2.17'
+	compile 'org.slf4j:slf4j-log4j12:1.7.7'
+	
+}
+
+// target Java 7 class files
+targetCompatibility = 1.7
+
+
+// remap source directories
+sourceSets {
+	main {
+		java { srcDir 'src' }
+		resources { srcDir 'cfg/common' }
+	}
+	test {
+		java { srcDir 'test' }
+		resources { srcDir 'cfg/test' }
+	}
+}
+
+// remap webapp content
+webAppDirName = 'web'
+
+// generate package* tasks for all defined configurations
+import org.apache.tools.ant.filters.ReplaceTokens
+project.file('cfg').listFiles().each { File file ->
+	if (file.name != 'common' && file.name != '.svn') {
+	      tasks.create(name: "package$file.name", type: War, dependsOn: classes) {
+			classifier = file.name
+			from(file) {
+				into('WEB-INF/classes')
+				include "**/*"            
+				filter(ReplaceTokens, tokens: ['app.version': project.version])
+			}
+		}
+	}
+}
+
+task dist (dependsOn: tasks.matching { Task task -> task.name.startsWith("package") })
