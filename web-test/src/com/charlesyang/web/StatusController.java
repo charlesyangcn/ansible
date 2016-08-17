@@ -22,14 +22,7 @@ public class StatusController {
 	public StatusController(Environment environment) {
 		datacenterId = environment.getProperty("data.generator.datacenterId");
 		workerId = environment.getProperty("data.generator.workerId");
-		String nodeNameTemp = System.getenv("node.name");
-		if(nodeNameTemp==null||nodeNameTemp.equals("")){
-			nodeNameTemp = System.getProperty("node.name");
-		}
-		if(nodeNameTemp==null||nodeNameTemp.equals("")){
-			nodeNameTemp = environment.getProperty("node.name");
-		}
-		nodeName = nodeNameTemp;
+		nodeName = environment.getProperty("node.name");
 	}
 	
 	@RequestMapping(value = "/status")
