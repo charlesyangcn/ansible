@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @Configuration
 @EnableWebMvc
-@PropertySource({"classpath:application.properties", "classpath:node.properties"})
+@PropertySource({"classpath:application.properties"})
 @ComponentScan({ "com.charlesyang.example" })
 public class AppConfig extends WebConfig {
 

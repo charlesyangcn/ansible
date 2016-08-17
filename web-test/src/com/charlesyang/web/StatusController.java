@@ -16,17 +16,20 @@ public class StatusController {
 
 	private final String datacenterId;
 	private final String workerId;
+	private final String nodeName;
 
 	@Autowired
 	public StatusController(Environment environment) {
 		datacenterId = environment.getProperty("data.generator.datacenterId");
 		workerId = environment.getProperty("data.generator.workerId");
+		nodeName = System.getenv("node.name");
 	}
 	
 	@RequestMapping(value = "/status")
 	public void status(Model model) {
 			model.addAttribute("datacenterId", datacenterId);
 			model.addAttribute("workerId", workerId);
+			model.addAttribute("nodeName",nodeName);
 	}
 
 	

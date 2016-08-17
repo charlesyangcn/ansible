@@ -7,6 +7,7 @@
 </head>
 <body>
 	datacenterId: <b>${datacenterId}</b><br/>
-	workerId: <b>${workerId}</b>
+	workerId: <b>${workerId}</b><br/>
+	nodeName: <b>${nodeName}</b>
 </body>
 </html>

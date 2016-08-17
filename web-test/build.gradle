@@ -7,12 +7,7 @@ group = 'com.charlesyang.app'
 archivesBaseName = 'web-test'
 version = '1.0.0.RELEASE'
 
-//Allow the version to be determined by the svn tag via the jenkins parameterized build
-if (project.hasProperty("svntag")) {
-    version = svntag
-}
-
-// use Mnet and Maven central repositories
+//
 repositories {
 	mavenCentral()
 }
