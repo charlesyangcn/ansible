@@ -6,8 +6,10 @@
 	<title>Health</title>		
 </head>
 <body>
+	appName: <b>${appName}</b><br/>
+	nodeName: <b>${nodeName}</b><br/>
 	datacenterId: <b>${datacenterId}</b><br/>
-	workerId: <b>${workerId}</b><br/>
-	nodeName: <b>${nodeName}</b>
+	workerId: <b>${workerId}</b>
+	
 </body>
 </html>
